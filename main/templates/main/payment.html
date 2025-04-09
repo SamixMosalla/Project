@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} سبد خرید - فروشگاه آنلاین
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}">
+{% endblock %}
+
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+
+{% block content %}
+<main>
+    <section class="form login-form section mt-4">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form register-form " id="form-register">
+                        <p class="form-title register-title">
+                            جزئیات صورت حساب
+                        </p>
+                        <form id="registerform" method="post">
+                            {% csrf_token %}
+                            <label for="name">
+                                <p>
+                                    نام
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.first_name.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="family">
+                                <p>
+                                    نام خانوادگی
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.last_name.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="ostan">
+                                <p>
+                                    استان
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.province }}
+                            {% if form.province.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.province.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="street">
+                                <p>
+                                    آدرس خیابان
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.street }}
+                            {% if form.street.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.street.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="code_posti">
+                                <p>
+                                    کد پستی
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.postal_code }}
+                            {% if form.postal_code.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.postal_code.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="phone_number">
+                                <p>
+                                    شماره تلفن
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.phone_number }}
+                            {% if form.phone_number.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.phone_number.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="email">
+                                <p>
+                                    ایمیل
+                                    <span class="text-danger">*</span>
+                                </p>
+                            </label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <button class="form-btn register-form-btn">
+                                ثبت سفارش
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 container-total-price">
+                    <div class="container-data-price">
+                        <p class="title-sum-of-product">
+                            سفارش شما
+                        </p>
+
+                        <div class="container-data">
+                            <div class="sum_price">
+                                <p class="p-sum-price">
+                                    محصول
+                                </p>
+                                <p class="number-sum-price" id="total-price-update">
+                                    جمع جزء
+                                </p>
+                            </div>
+                            {% for product_id, product in cart.items %}
+                            <div class="data-of-product">
+                                <p class="sum-text">
+                                    {{product.name}} - {{product.quantity}}
+                                </p>
+                                <p class="number-sum-price" id="sum-total-price">
+                                    {{ product.total_price }} تومان
+                                </p>
+                            </div>
+
+                            {% endfor %}
+
+
+                            <div class="sum_price last-sum-price sum-total-last-price">
+                                <p class="sum-text">
+                                    جمع کل
+                                </p>
+                                <p class="number-sum-price last-price" id="sum-total-price">
+                                    {{ total_price }} تومان
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="note-description">
+                            اطلاعات شخصی شما برای پردازش سفارش شما، پشتیبانی از تجربه شما در سراسر این وب سایت و برای
+                            اهدافی که در سیاست حفظ حریم خصوصی ذکر شده است استفاده می شود.
+                        </p>
+
+                        <a href="" class="payment_btn">
+                            ثبت سفارش
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</main>
+{% endblock %}

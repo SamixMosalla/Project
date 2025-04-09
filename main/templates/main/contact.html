@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} تماس با ما - فروشگاه آنلاین
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/contatct.css' %}">
+{% endblock %}
+{% block logo %}
+<img src="{% static 'imgs/logo-white.png' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+
+
+{% block special %}
+
+<div class="overly-header"></div>
+<svg class="header-shape" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+    <polygon fill="#0ead69" points="0,10 100,0 100,10"></polygon>
+</svg>
+{% endblock %}
+
+{% block another_block %}
+<!-- container of form and text and image  -->
+<div class="container mt-5 p-3 container-form-info-contact position-relative z-3 ">
+    <div class="row g-5 d-flex justify-content-center align-items-center ">
+        <div class="col-11 col-lg-5 col-md-6 col-sm-11">
+            <div class="col-12 position-relative text-watermark-section">
+                <p class="text-watermark contact-text position-absolute">CONTACT</p>
+                <p class="title-information-contact fs-3 ">
+                    در زمینه محصولات سوالی دارید ؟
+                </p>
+            </div>
+            <div class="information-contact">
+                <p class="about-information-contact">
+                    برای تغییر این متن بر روی دکمه ویرایش کلیک کنید. لورم ایپسوم متن ساختگی با تولید سادگی
+                    نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                </p>
+            </div>
+            <div class="col-12 col-lg-5 col-sm-12">
+                <img src="{% static 'imgs/contact-bg-min.png' %}" alt="human" class="img-fluid person-image">
+            </div>
+        </div>
+        <div class="col col-lg-2 col-md-0 xs-class-dotter">
+            <img src="./static/imgs/dotter-arrow.png" alt="" class="img-fluid dotter-image-header">
+        </div>
+        <div class="col-11 col-lg-5 col-md-6 col-sm-11 container-contact-form">
+            {% if messages %}
+            {% for message in messages %}
+            <script>
+                alert(`{{ message }}`)
+            </script>
+            {% endfor %}
+            {% endif %}
+            <form class="contact-form" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="send-message-btn mt-2">ارسال پیام </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container container-data-store">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-10 container-col-background ">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12 contact-data-item">
+                        <i style='font-size:24px' class='far'>&#xf0e0;</i>
+                        <p class="title-contact-item">
+                            پست الکترونیکی :
+                        </p>
+                        <p class="p-contact-data">
+                            {{ contact_info.management_email }}
+                        </p>
+                        <p class="p-contact-data">
+                            {{ contact_info.support_email }}
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12 contact-data-item">
+                        <i style='font-size:24px' class='fas'>&#xf87b;</i>
+                        <p class="title-contact-item">
+                            شماره تماس:
+                        </p>
+                        <p class="p-contact-data">
+                            مدیریت:
+                            {{ contact_info.management_phone }}
+                        </p>
+                        <p class="p-contact-data">
+                            پشتیبانی:
+                            {{ contact_info.support_phone }}
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12 contact-data-item">
+                        <i style='font-size:24px' class='fas'>&#xf3c5;</i>
+                        <p class="title-contact-item">
+                            آدرس ما:
+                        </p>
+                        <p class="p-contact-data">
+                            {{ contact_info.address }}
+                        </p>
+                        <p class="p-contact-data">
+                            {{ contact_info.address }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-11 col-lg-11 col-md-11 dol-sm-11">
+                <iframe class="address-in-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d176192.11638390783!2d50.7353309!3d28.9233834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fb2171732ee57db%3A0x20f5e2a0db1394c4!2sBushehr%2C%20Bushehr%20Province!5e0!3m2!1sen!2sir!4v1712563143965!5m2!1sen!2sir"
+                    width="100%" height="450" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}

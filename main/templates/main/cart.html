@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}سبد خرید - فروشگاه آنلاین
+{% endblock %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/sabad.css' %}">
+{% endblock %}
+
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+{% block another_block %}
+<!-- the banner of store -->
+<div class="container-fluid mt-2">
+    <div class="row align-items-end">
+        <div class="col-11 container-of-banner">
+            <div class="banner-of-store">
+                <div class="overly"></div>
+                <div class="description-banner row d-flex align-items-center justify-content-center h-100">
+                    <div class="col">
+                        <h1 class="title-of-store">
+                            سبد خرید
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container-default">
+    <div class="row g-5">
+        <div class="col-12 col-sm-12 col-lg-8 col-md-12">
+            <!--             
+            <table id="desktop-basket-section">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;" class="item-column">محصول</th>
+                        <th style="text-align: center;" class="item-column">قیمت</th>
+                        <th style="text-align: right;" class="item-column">تعداد</th>
+                        <th style="text-align: left;" class="item-column">جمع جزء</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for product_id, product in cart.items %}
+                    <tr data-product-id="{{ product_id }}">
+                        <td class="product product-name-image">
+                            <button class="btn btn-danger btn-sm remove-item">×</button>
+                            <img src="{{ product.image }}" class="product product-image-table">
+                            <span class="product product-name">
+                                {{ product.name }}
+                            </span>
+                        </td>
+                        <td class="product product-price">{{ product.price }} تومان</td>
+                        <td class="product product-quantity">
+                            <div class="quantity-control">
+                                <button class="btn btn-sm decrease-qty  decrease-btn">-</button>
+                                <input type="text" class="qty-input count-product" value="{{ product.quantity }}"
+                                    readonly>
+                                <button class="btn btn-sm increase-qty increase-btn">+</button>
+                            </div>
+                        </td>
+                        <td class="product product-total_price">{{ product.total_price }} تومان</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> -->
+
+            <table id="responsive_basket-section">
+                {% for product_id, product in cart.items %}
+                <tbody data-product-id="{{ product_id }}">
+                    <tr>
+                        <td class="td-title td-product_name">
+                            <img src="{{ product.image }}" class="product product-image-table-responsive">
+                            {{product.name}}
+                        </td>
+                        <td class="td-remove">
+                            <button class="btn btn-danger btn-sm remove-item">×</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-title">
+                            قیمت
+                        </td>
+                        <td class="td-price">
+                            {{product.price}} تومان
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-title">تعداد</td>
+                        <td class="td-count">
+                            <div class="quantity-control">
+                                <button class="btn btn-sm decrease-qty  decrease-btn">-</button>
+                                <input type="text" class="qty-input count-product" value="{{ product.quantity }}"
+                                    readonly>
+                                <button class="btn btn-sm increase-qty increase-btn">+</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-title">جمع جزء</td>
+                        <td class="td-total-price">
+                            {{ product.total_price }} تومان
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 container-total-price">
+            <div class="container-data-price">
+                <p class="title-sum-of-product">
+                    جمع کل سبد خرید
+                </p>
+
+                <div class="sum_price">
+                    <p class="p-sum-price">
+                        جمع جزء
+                    </p>
+                    <p class="number-sum-price" id="total-price-update">
+                        {{ total_price }} تومان
+                    </p>
+                </div>
+
+                <div class="sum_price last-sum-price">
+                    <p class="sum-text">
+                        مجموع
+                    </p>
+                    <p class="number-sum-price last-price" id="sum-total-price">
+                        {{ total_price }} تومان
+                    </p>
+                </div>
+
+                <a href="{% url 'main:payment' %}" class="payment_btn" id="paymentButton"
+                    data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+                    ادامه جهت تسویه
+                </a>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        document.getElementById("paymentButton").addEventListener("click", function (event) {
+                            var isAuthenticated = this.getAttribute("data-user-authenticated") === "true";
+
+                            if (!isAuthenticated) {
+                                event.preventDefault(); // جلوگیری از هدایت به صفحه بعد
+
+                                Swal.fire({
+                                    title: "ورود به حساب کاربری",
+                                    text: "برای تکمیل سفارش، لطفاً ابتدا وارد حساب کاربری خود شوید.",
+                                    icon: "warning",
+                                    confirmButtonText: "ورود به حساب",
+                                    showCancelButton: true,
+                                    cancelButtonText: "بعداً",
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = "{% url 'register:register' %}"; // هدایت به صفحه ورود
+                                    }
+                                });
+                            }
+                        });
+                    }); 
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/cart.js' %}"></script>
+
+{% endblock %}

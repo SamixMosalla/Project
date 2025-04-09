@@ -1,0 +1,841 @@
+@font-face {
+    font-family: 'iranyekanwebregular';
+    src: url('../fonts/iranyekanwebregular.ttf');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Black';
+    src: url('../fonts/IRANSansX-Black.woff');
+}
+
+@font-face {
+    font-family: 'iranyekanwebbold';
+    src: url('../fonts/iranyekanwebbold.ttf');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Medium';
+    src: url('../fonts/IRANSansX-Medium.woff');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Light';
+    src: url('../fonts/IRANSansX-Light.woff');
+}
+
+@font-face {
+    font-family: 'iranyekanwebmedium';
+    src: url('../fonts/iranyekanwebmedium.ttf');
+}
+
+
+@font-face {
+    font-family: 'IRANSansX-Bold';
+    src: url('../fonts/IRANSansX-Bold.woff');
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+}
+
+
+/* header section  */
+
+
+
+/* this section about main menu of website in the header */
+
+/* the main menu and responsive menu section  */
+
+.container-main-menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    align-items: center;
+}
+
+.container-main-menu-logo {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo-image {
+    /* flex: 0 0 20%; */
+    max-width: 180px;
+}
+
+.navbar-main-menu ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.navbar-main-menu-item {
+    font-family: 'IRANSansX-Medium';
+    font-size: 14px;
+}
+
+.navbar-main-menu-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.navbar-main-menu-link:hover {
+    color: #0ead69;
+}
+
+.selected {
+    color: #0ead69;
+}
+
+.navbar-register-buy ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar-register-buy-item {
+    font-family: 'IRANSansX-Medium';
+    font-size: 14px;
+}
+
+.navbar-register-buy-link {
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #000;
+    padding: 7px;
+    border-radius: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.register-section-link {
+    background-color: #0ead69;
+    color: #fff;
+    border: 1px solid #0ead69;
+}
+
+
+/* responsive menu */
+.container-responsive-menu {
+    display: none;
+}
+
+.responsive-menu-btn {
+    border: none;
+    background-color: #fff;
+    outline: none;
+    font-size: clamp(14px, 4vw, 24px);
+}
+
+
+.search-input {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'iranyekanwebmedium';
+    margin-bottom: 20px;
+}
+
+.responsive-menu-item {
+    font-size: 16px;
+    list-style: none;
+    font-family: 'IRANSansX-Light';
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.responsive-menu-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.basket-icon-section {
+    text-align: left;
+}
+
+.logo-img-section {
+    text-align: center;
+}
+
+.buy-section-btn {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: clamp(12px, 3vw, 20px);
+}
+
+.logo-img {
+    max-height: 60px;
+}
+
+@media screen and (max-width:1100px) {
+    .container-main-menu {
+        display: none;
+    }
+
+    .container-responsive-menu {
+        display: block;
+    }
+
+    /* .main-menu-section {
+        display: none;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .register-btn {
+        display: none;
+    } */
+
+    .sum-price-product {
+        display: none;
+    }
+
+}
+
+.row {
+    margin: 0 !important;
+}
+
+.container-info-product {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.simple-menu-user {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    margin: 50px 0px;
+}
+
+.simple-menu-item a {
+    text-decoration: none;
+    font-family: 'iranyekanwebmedium';
+    font-size: 14px;
+    padding: 2px;
+    color: #727277;
+    text-align: center;
+}
+
+.textwatermark {
+    font-size: clamp(40px, 10vw, 90px);
+    font-family: 'IRANSansX-Black';
+    color: rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    white-space: nowrap;
+    z-index: 0;
+    position: absolute;
+    opacity: 0.3;
+}
+
+.textwatermark-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.name-product {
+    font-size: clamp(25px, 2vw, 60px);
+    font-family: 'IRANSansX-Black';
+    z-index: 1;
+
+}
+
+.container-product-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.discount-section {
+    background-color: #0ead69;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'iranyekanwebmedium';
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+}
+
+.product-image {
+    max-width: 100%;
+    padding: 0rem 1.5rem 0rem 1.5rem;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+
+}
+
+
+.container-data-product {
+    border-right: 1px solid #ddd;
+    padding: 20px;
+}
+
+@media screen and (max-width:992px) {
+    .container-data-product {
+        border-right: none;
+    }
+}
+
+.grade-of-product {
+    display: flex;
+    font-size: 12px;
+    color: #ECC521;
+    align-self: center;
+    margin: 20px 0px;
+}
+
+.description-product {
+    font-size: 14px;
+    font-family: 'IRANSansX-Light';
+    line-height: 30px;
+}
+
+.price-product {
+    font-family: 'iranyekanwebregular';
+    font-size: 20px;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.main-price {
+    font-size: clamp(16px, 2vw, 18px);
+    text-decoration: line-through;
+}
+
+.discount-price {
+    font-size: clamp(18px, 2vw, 22px);
+}
+
+/* buy count btn section  */
+.add-product-basket {
+    background-color: #0ead69;
+    color: #fff;
+    font-family: 'IRANSansX-Bold';
+    font-size: 13px;
+    border: none;
+    outline: linen;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.count-product {
+    font-size: 20px;
+    font-family: 'iranyekanwebmedium';
+}
+
+.plus-product-btn,
+.minus-product-btn {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
+    font-family: 'iranyekanwebmedium';
+}
+
+.plus-product-btn:hover,
+.minus-product-btn:hover {
+    background-color: #0ead69;
+    color: #fff;
+}
+
+
+.count-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.buy-count-btn {
+    display: flex;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+/* container about product  */
+
+.container-about-product {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.title-about-product {
+    display: flex;
+    gap: 40px;
+}
+
+.title-about-product a {
+    text-decoration: none;
+    color: #727277;
+    font-size: clamp(13px, 2vw, 16px);
+    font-family: 'IRANSansX-medium';
+    padding: 10px;
+    text-align: center;
+}
+
+.title-about-product a:hover {
+    border-bottom: 2px solid #0ead69;
+    transition: 0.1s;
+}
+
+.description-about-product {
+    font-size: 16px;
+    font-family: 'IRANSansX-Light';
+    text-align: justify;
+    line-height: 35px;
+    padding: 0px 20px;
+    display: block;
+}
+
+.another-description-product {
+    border-top: 1px solid #ddd;
+    display: none;
+}
+
+.p-about-prodcut {
+    border-top: 1px solid #ddd;
+    padding: 20px 0px;
+}
+
+
+.data-product {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.attribut-product {
+    display: flex;
+    gap: 200px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    color: #003751;
+    font-size: 14px;
+    font-family: 'IRANSansX-Bold';
+    font-weight: 500px;
+}
+
+.attribut-product:last-child {
+    border-bottom: none;
+    padding: 0px;
+}
+
+
+/* comment form section */
+.comment-form-section {
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    display: none;
+}
+
+.text-comment {
+    font-size: 14px;
+    font-family: 'iranyekanwebbold';
+}
+
+
+.container-of-grade-product {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.about-comment-form {
+    margin: 0px;
+}
+
+.comment-form p {
+    font-family: 'iranyekanwebbold';
+    font-size: 14px;
+}
+
+.grade-user-style {
+    color: #ddd;
+    font-size: 14px;
+}
+
+
+/* comment form section  */
+
+.form-container-content {
+    font-size: 14px;
+    font-family: 'iranyekanwebmedium';
+}
+
+.usercomment {
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    outline: none;
+    height: 200px;
+}
+
+.form-container-content input {
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.send-comment-btn {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #0ead69;
+    font-family: 'iranyekanwebmedium';
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+/* container-related-product */
+.container-related-product {
+    margin: 50px 0px;
+}
+
+.title-related-product {
+    font-size: clamp(18px, 2vw, 22px);
+    font-family: 'IRANSansX-Black';
+
+}
+
+.related-watermark {
+    font-size: clamp(40px, 10vw, 53px);
+    font-family: 'IRANSansX-Black';
+}
+
+
+/* related prodcut section  */
+@media screen and (max-width:360px) {
+    .xs-class {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+
+.product-item {
+    height: 100%;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 30px 2px 30px 2px;
+    padding: 25px;
+    align-self: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.image-of-product {
+    width: 100%;
+    padding: 1rem 1.5rem 1.2rem 1.5rem;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
+@media screen and (max-width : 480px) {
+    .image-of-product {
+        padding: 0px;
+    }
+}
+
+.image-of-product:hover {
+    transform: translateY(-8px);
+    transition: 0.3s;
+}
+
+.name-product-item {
+    color: #000;
+    text-decoration: none;
+    font-family: 'IRANSansX-Black';
+    font-size: clamp(10px, 3vw, 14px);
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-family: 'iranyekanwebregular';
+    font-size: 15px;
+    color: #0ead69;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.price-unit {
+    font-size: 12px;
+    color: #000;
+    font-weight: 100;
+}
+
+.main-price,
+.main-price-unit {
+    color: #D5D5D5;
+    text-decoration: line-through;
+}
+
+.start-buy-section {
+    /* margin-top: auto ; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    align-self: flex-end;
+}
+
+.grade-of-product {
+    display: flex;
+    font-size: clamp(10px, 2vw, 12px);
+    color: #ECC521;
+    align-self: center;
+}
+
+.buy-section {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0ead69;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px 2px 15px 2px;
+    font-size: clamp(12px, 2vw, 14px);
+}
+
+.buy-section:hover {
+    background-color: #0ead68b3;
+}
+
+
+
+/*another data section of website  */
+
+
+.another-data-of-website {
+    background-color: #fff;
+    padding: 2rem 2.625rem 2rem 2.625rem;
+    box-shadow: -5px 6px 12px 0 rgba(0, 0, 0, .05);
+    border-radius: 10px;
+    transform: translate(0%, -50%);
+}
+
+.dotter-img {
+    max-width: 100%;
+    max-height: 60px;
+}
+
+@media screen and (max-width:400px) {
+    .dotter-img {
+        display: none;
+    }
+}
+
+.text-help {
+    color: #737373;
+    font-family: 'iranyekanwebregular';
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+.exclamation {
+    background-color: #D1D1D1;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.email-section {
+    font-family: 'IRANSansX-Light';
+    color: #737373;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+
+.icon-email {
+    background-color: #E9FFF5;
+    color: #0ead69;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.phone-section {
+    font-family: 'IRANSansX-Light';
+    color: #737373;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+@media screen and (max-width:480px) {
+    .phone-section {
+        justify-content: end;
+    }
+}
+
+.icon-phone {
+    transform: scaleX(-1);
+    background-color: #E9FFF5;
+    color: #0ead69;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+
+/* footer section */
+
+footer {
+    background-color: #fafafa;
+    margin-top: 200px;
+}
+
+
+
+
+.title-column-footer-section {
+    font-size: 18px;
+    font-family: 'IRANSansX-Black';
+
+}
+
+
+.span-title-column-footer-section {
+    color: #0ead69;
+}
+
+
+.description-section-column-footer-section {
+    color: #737373;
+    margin-top: 15px;
+    padding: 10px;
+    font-family: 'IRANSansX-Light';
+    font-size: 14px;
+
+}
+
+
+.icon-of-social-media {
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+
+}
+
+.icon-of-social-media a {
+    color: #d6d3d3;
+    background-color: #f9f9f9;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.icon-of-social-media a:hover {
+    transform: translateY(-8px);
+    transition: 0.5s;
+}
+
+.menu-of-footer {
+    margin-top: 15px;
+}
+
+.menu-of-footer ul {
+    margin-right: 25px;
+}
+
+.menu-of-footer-item {
+    color: #0ead69;
+    margin-bottom: 10px;
+}
+
+.menu-of-footer-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'IRANSansX-Light';
+    color: #727272;
+}
+
+.permissions-img {
+    margin-top: 20px;
+}
+
+
+.underline {
+    border-top: 1px solid #ddd;
+    /* padding: 0px 50px 20px 0px; */
+}
+
+.copyright-text {
+    padding: 0px;
+    padding: 20px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+
+/* view cart and basket section */
+.view-cart {
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+    font-family: 'iranyekanwebbold';
+}
+
+.comment-list{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    list-style: none;
+}
+
+.comment-list li{
+    margin: 0px 10px;
+    border-bottom: 1px dashed #ddd;
+}

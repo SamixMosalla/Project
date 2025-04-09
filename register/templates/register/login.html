@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}حساب کاربری من {% endblock title%}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}"> {% endblock style %}
+
+
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+{% block content %}
+
+<main>
+    <section class="form login-form section mt-4">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-5">
+
+                    <div class="form login-form" id="form-login"
+                        style="display: {% if active_form == 'login' %}block{% else %}none{% endif %};">
+                        <p class="form-title login-title">ورود</p>
+                        <form id="loginform" method="post">
+                            {% csrf_token %}
+
+                            <!-- نمایش خطاهای کلی فرم -->
+                            {% if login_form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {% for error in login_form.non_field_errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="username">
+                                <p>ایمیل یا نام کاربری <span class="text-danger">*</span></p>
+                            </label>
+                            {{ login_form.username }}
+                            {% if login_form.username.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in login_form.username.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="password">
+                                <p>رمز عبور <span class="text-danger">*</span></p>
+                            </label>
+                            {{ login_form.password }}
+                            {% if login_form.password.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in login_form.password.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <button type="submit" name="login" class="form-btn register-form-btn">ورود</button>
+                        </form>
+                    </div>
+
+                    <div class="form register-form " id="form-register"
+                        style="display: {% if active_form == 'register' %}block{% else %}none{% endif %};">
+                        <p class="form-title register-title">
+                            ثبت نام
+                        </p>
+                        <form id="registerform" method="post">
+                            {% csrf_token %}
+                            <label for="name">
+                                <p>نام کاربری <span class="text-danger">*</span></p>
+                            </label>
+                            {{register_form.username}}
+                            {% if register_form.username.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in register_form.username.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <label for="family">
+                                <p>نام و نام خانوادگی <span class="text-danger">*</span></p>
+                            </label>
+                            {{register_form.first_name}}
+
+
+                            <label for="email">
+                                <p>ایمیل <span class="text-danger">*</span></p>
+                            </label>
+                            {{register_form.email}}
+                            {% if register_form.email.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in register_form.email.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+
+                            <label for="password1">
+                                <p>رمزعبور <span class="text-danger">*</span></p>
+                            </label>
+                            {{register_form.password1}}
+                            {% if register_form.password1.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in register_form.password1.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+
+                            <label for="password2">
+                                <p>تکرار رمز عبور <span class="text-danger">*</span></p>
+                            </label>
+                            {{register_form.password2}}
+                            {% if register_form.password2.errors %}
+                            <div class="alert alert-danger">
+                                {% for error in register_form.password2.errors %}
+                                <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <p class="form-description mt-4">
+                                اطلاعات شخصی شما برای پردازش سفارش شما استفاده می‌شود، و پشتیبانی از تجربه شما در
+                                این وبسایت، و برای اهداف دیگری که در سیاست حفظ حریم خصوصی توضیح داده شده است.
+                            </p>
+
+                            <button type="submit" name="register" class="form-btn register-form-btn">ثبت نام</button>
+                        </form>
+
+
+                        <script>
+                            function submitRegisterForm(event) {
+                                event.preventDefault();
+                                document.getElementById("registerform").submit();
+                            }
+                        </script>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="col-lg-7 container-form-section ">
+                    <div class="form-section register-section">
+                        <p class="form-title register-text-title">
+                            ثبت نام
+                        </p>
+                        <p class="form-description">
+                            ثبت نام در این سایت به شما امکان می دهد به وضعیت و سابقه سفارش خود دسترسی داشته باشید.
+                            کافی است فیلدهای زیر را پر کنید، و ما در کمترین زمان یک حساب کاربری جدید برای شما راه
+                            اندازی خواهیم کرد. ما فقط از شما اطلاعات لازم را برای سریع‌تر و آسان‌تر کردن فرآیند خرید
+                            می‌خواهیم.
+                        </p>
+                        <button class="change-btn-form login-btn" id="toggleBtn">
+                            ورود
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    document.getElementById("show-login").addEventListener("click", function () {
+        document.getElementById("login-container").style.display = "block";
+        document.getElementById("register-container").style.display = "none";
+    });
+
+    document.getElementById("show-register").addEventListener("click", function () {
+        document.getElementById("register-container").style.display = "block";
+        document.getElementById("login-container").style.display = "none";
+    });
+</script>
+
+<script src="../../static/js/login.js"> </script>
+{% endblock %}

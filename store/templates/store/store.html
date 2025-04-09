@@ -1,0 +1,202 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load i18n %}
+{% block title %}
+فروشگاه - فروشگاه آنلاین
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+{% block another_block %}
+<!-- the banner of store -->
+<div class="container-fluid mt-2 p-2">
+    <div class="row align-items-end">
+        <div class="col-11 container-of-banner">
+            <div class="banner-of-store">
+                <div class="overly"></div>
+                <div class="description-banner row d-flex align-items-center justify-content-center h-100">
+                    <div class="col">
+                        <h1 class="title-of-store">
+                            فروشگاه
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<main style="margin-top: 100px;">
+
+    <div class="container-of-product-select" style="width: 91%; margin: 0 auto;">
+        <div class="row category-item-section">
+            <div class="col-12 col-lg-3  col-md-3 col-sm-12">
+                <div class="col">
+                    <form action="" class="form-select-products">
+                        <p class="title-of-form-select-products">
+                            <span class="text-success">دسته بندی</span> محصولات
+                        </p>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ajil" name="dates" value="ajil">
+                            <label for="ajil">آجیل</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="badam" name="dates" value="badam">
+                            <label for="badam">بادام</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="tokmeh" name="dates" value="tokmeh">
+                            <label for="tokmeh">تخمه</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="fandogh" name="dates" value="fandogh">
+                            <label for="fandogh">فندق</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="gerdo1" name="dates" value="gerdo">
+                            <label for="gerdo1">گردو</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="foreign-products" name="dates" value="foreign">
+                            <label for="foreign-products">محصولات خارجی</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="dried-fruits" name="dates" value="dried-fruits">
+                            <label for="dried-fruits">میوه خشک</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col mt-3">
+                    <form action="" class="form-select-products">
+                        <p class="title-of-form-select-products text-success">
+                            <span class="text-black">فیلتر بر اساس </span> قیمت
+                        </p>
+                        <input type="range" class="form-control" min="100000" max="1000000" step="10000" value="500000"
+                            oninput="updateRangeValue(this.value)">
+                        <p class="text-muted range-price mt-3" id="rangevalue">10000 تومان</p>
+                    </form>
+                    <script>
+                        function updateRangeValue(value) {
+                            document.getElementById('rangevalue').textContent = parseInt(value).toLocaleString() + ' تومان';
+                        }
+                    </script>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+
+                <div class="col-12 col-lg-6 col-md-8 mg-xs">
+                    <form method="GET" id="sortForm">
+                        <select name="sort" id="product" class="sorting-product-section form-select">
+                            <option value="">ترتیب بر اساس ...</option>
+                            <option value="cheap">بر اساس قیمت از پایین‌ترین به بالاترین</option>
+                            <option value="expensive">بر اساس قیمت از بالاترین به پایین‌ترین</option>
+                        </select>
+                    </form>
+                </div>
+                <script>
+                    document.getElementById("product").addEventListener("change", function () {
+                        document.getElementById("sortForm").submit();
+                    });
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const params = new URLSearchParams(window.location.search);
+                        const selectedSort = params.get("sort");
+                        if (selectedSort) {
+                            document.getElementById("product").value = selectedSort;
+                        }
+                    });
+                </script>
+
+                <div class="row mt-3">
+                    {% for product in products %}
+                    <div class="col-6 col-md-4 col-lg-4  col-sm-4 mb-4 xs-class">
+                        <a href="{{ product.get_absolute_url }}">
+                            <div class="product-item" id="product_id">
+                                <img src="{{ product.image.url }}" alt="" class="img-fluid image-of-product">
+                                <a href="{{product.get_absolute_url}}" class="name-product-item">{{product.name}}</a>
+                                <p class="price main-price">{{product.main_price}} <span
+                                        class="price-unit main-price-unit">تومان</span></p>
+                                <!-- <p class="price discount-price">{{product.discount_price}} <span
+                                        class="price-unit">تومان</span></p> -->
+                                <div class="start-buy-section d-flex justify-content-between">
+                                    <!-- <div class="grade-of-product">
+                                        <i class='fas'>&#xf005;</i>
+                                        <i class='fas'>&#xf005;</i>
+                                        <i class='fas'>&#xf005;</i>
+                                        <i class='fas'>&#xf005;</i>
+                                        <i class='fas'>&#xf005;</i>
+                                    </div> -->
+
+
+
+                                    <div class="mass-section">
+                                        <a class="mass-btn" href="{% url 'orderbulk:orderbulk' %}">
+                                            <i class="fa truck-icon">&#xf0d1;</i>
+                                            <span class="btn-text">خرید عمده</span>
+                                        </a>
+                                    </div>
+
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const massBtn = document.querySelector('.mass-btn');
+                                            const btnText = massBtn.querySelector('.btn-text');
+
+                                            massBtn.addEventListener('mouseenter', function () {
+                                                this.style.width = '150px';
+                                                btnText.style.display = 'inline-block';
+                                                setTimeout(() => {
+                                                    btnText.style.opacity = '1';
+                                                }, 10); // تاخیر کوتاه برای فعال شدن انیمیشن
+                                            });
+
+                                            massBtn.addEventListener('mouseleave', function () {
+                                                this.style.width = '50px';
+                                                btnText.style.opacity = '0';
+                                                setTimeout(() => {
+                                                    btnText.style.display = 'none';
+                                                }, 300); // برابر با مدت زمان انیمیشن
+                                            });
+                                        });
+
+                                    </script>
+
+                                    <div>
+                                        <button href="#" class="buy-section add-to-cart"
+                                            data-product-id="{{ product.id }}">
+                                            <i class='fas icon-basket'>&#xf07a;</i>
+                                        </button>
+                                        <!-- see basket section when a product add to basket  -->
+                                        <a href="{% url 'main:cart' %}" class="view-cart" style="display:none;">مشاهده
+                                            سبد
+                                            خرید</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</main>
+<script src="{% static 'js/basket.js' %}"></script>
+
+{% endblock %}
