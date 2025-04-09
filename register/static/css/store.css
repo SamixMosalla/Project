@@ -1,0 +1,578 @@
+@font-face {
+    font-family: 'iranyekanwebregular';
+    src: url('../fonts/iranyekanwebregular.ttf');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Black';
+    src: url('../fonts/IRANSansX-Black.woff');
+}
+
+@font-face {
+    font-family: 'iranyekanwebbold';
+    src: url('../fonts/iranyekanwebbold.ttf');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Medium';
+    src: url('../fonts/IRANSansX-Medium.woff');
+}
+
+@font-face {
+    font-family: 'IRANSansX-Light';
+    src: url('../fonts/IRANSansX-Light.woff');
+}
+
+@font-face {
+    font-family: 'iranyekanwebmedium';
+    src: url('../fonts/iranyekanwebmedium.ttf');
+}
+
+
+@font-face {
+    font-family: 'IRANSansX-Bold';
+    src: url('../fonts/IRANSansX-Bold.woff');
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+}
+
+body {
+    max-width: 100%;
+}
+
+.row {
+    margin-right: calc(-.4 * var(--bs-gutter-x)) !important;
+    margin-left: calc(-.4 * var(--bs-gutter-x)) !important;
+
+    /* margin-right:0 !important ;
+    margin-left: 0 !important; */
+}
+
+/* this section about main menu of website in the header */
+
+/* the main menu and responsive menu section  */
+
+.container-main-menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 40px;
+    align-items: center;
+}
+
+.container-main-menu-logo {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo-image {
+    /* flex: 0 0 20%; */
+    max-width: 180px;
+}
+
+.navbar-main-menu ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.navbar-main-menu-item {
+    font-family: 'IRANSansX-Medium';
+    font-size: 14px;
+}
+
+.navbar-main-menu-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.navbar-main-menu-link:hover {
+    color: #0ead69;
+}
+
+.selected {
+    color: #0ead69;
+}
+
+.navbar-register-buy ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar-register-buy-item {
+    font-family: 'IRANSansX-Medium';
+    font-size: 14px;
+}
+
+.navbar-register-buy-link {
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #000;
+    padding: 7px;
+    border-radius: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.register-section-link {
+    background-color: #0ead69;
+    color: #fff;
+    border: 1px solid #0ead69;
+}
+
+
+/* responsive menu */
+.container-responsive-menu {
+    display: none;
+}
+
+.responsive-menu-btn {
+    border: none;
+    background-color: #fff;
+    outline: none;
+    font-size: clamp(14px, 4vw, 24px);
+}
+
+
+.search-input {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'iranyekanwebmedium';
+    margin-bottom: 20px;
+}
+
+.responsive-menu-item {
+    font-size: 16px;
+    list-style: none;
+    font-family: 'IRANSansX-Light';
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.responsive-menu-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.basket-icon-section {
+    text-align: left;
+}
+
+.logo-img-section {
+    text-align: center;
+}
+
+.buy-section-btn {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: clamp(12px, 3vw, 20px);
+}
+
+.logo-img {
+    max-height: 60px;
+}
+
+@media screen and (max-width:1100px) {
+    .container-main-menu {
+        display: none;
+    }
+
+    .container-responsive-menu {
+        display: block;
+    }
+
+    /* .main-menu-section {
+        display: none;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .register-btn {
+        display: none;
+    } */
+
+    .sum-price-product {
+        display: none;
+    }
+
+}
+
+
+/* banner of store section  */
+
+.container-of-banner {
+    margin: 0 auto;
+}
+
+.banner-of-store {
+    margin-top: 50px;
+    background-image: url('../imgs/header-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    max-height: 120px;
+    height: 120px;
+    width: 100%;
+    position: relative;
+}
+
+.overly {
+    position: absolute;
+    background-color: #0ead68a3;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    border-radius: 20px;
+
+}
+
+
+.description-banner {
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-family: 'iranyekanwebmedium';
+    font-size: 30px;
+}
+
+/* main section */
+
+/* product section */
+
+
+/* sorting product section */
+@media screen and (max-width:768px) {
+    .sorting-product-section {
+        margin-top: 20px;
+    }
+}
+
+.sorting-product-section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    outline: none;
+    /* padding: 10px; */
+    border-radius: 10px;
+    font-family: 'IRANSansX-Medium';
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+
+/* new product section  */
+.product-item {
+    height: 100%;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 30px 2px 30px 2px;
+    padding: 25px;
+    align-self: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.image-of-product {
+    width: 100%;
+    padding: 1rem 1.5rem 1.2rem 1.5rem;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
+@media screen and (max-width : 480px) {
+    .image-of-product {
+        padding: 0px;
+    }
+}
+
+.image-of-product:hover {
+    transform: translateY(-8px);
+    transition: 0.3s;
+}
+
+.name-product-item {
+    color: #000;
+    text-decoration: none;
+    font-family: 'IRANSansX-Black';
+    font-size: clamp(10px, 3vw, 14px);
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-family: 'iranyekanwebregular';
+    font-size: 15px;
+    color: #0ead69;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.price-unit {
+    font-size: 12px;
+    color: #000;
+    font-weight: 100;
+}
+
+.main-price,
+.main-price-unit {
+    color: #D5D5D5;
+    text-decoration: line-through;
+}
+
+.start-buy-section {
+    /* margin-top: auto ; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    align-self: flex-end;
+}
+
+.grade-of-product {
+    display: flex;
+    font-size: clamp(10px, 2vw, 12px);
+    color: #ECC521;
+    align-self: center;
+}
+
+.buy-section {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0ead69;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px 2px 15px 2px;
+    font-size: clamp(12px, 2vw, 14px);
+}
+
+.buy-section:hover {
+    background-color: #0ead68b3;
+}
+
+/* select product with forms */
+.title-of-form-select-products {
+    font-size: 18px;
+    font-family: 'iranyekanwebmedium';
+    line-height: 22px;
+}
+
+
+.form-select-products {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 14px;
+    max-width: 100%;
+}
+
+.form-select-products label {
+    font-family: 'iranyekanwebbold';
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width:360px) {
+    .xs-class {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.range-price {
+    font-size: clamp(12px, 2vw, 16px);
+    padding: 0px 5px;
+    font-family: 'iranyekanwebbold';
+}
+
+
+/*another data section of website  */
+
+
+.another-data-of-website {
+    background-color: #fff;
+    padding: 2rem 2.625rem 2rem 2.625rem;
+    box-shadow: -5px 6px 12px 0 rgba(0, 0, 0, .05);
+    border-radius: 10px;
+    transform: translate(0%, -50%);
+}
+
+.dotter-img {
+    max-width: 100%;
+    max-height: 60px;
+}
+
+@media screen and (max-width:400px) {
+    .dotter-img {
+        display: none;
+    }
+}
+
+.text-help {
+    color: #737373;
+    font-family: 'iranyekanwebregular';
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+.exclamation {
+    background-color: #D1D1D1;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.email-section {
+    font-family: 'IRANSansX-Light';
+    color: #737373;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+
+.icon-email {
+    background-color: #E9FFF5;
+    color: #0ead69;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.phone-section {
+    font-family: 'IRANSansX-Light';
+    color: #737373;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+@media screen and (max-width:480px) {
+    .phone-section {
+        justify-content: end;
+    }
+}
+
+.icon-phone {
+    transform: scaleX(-1);
+    background-color: #E9FFF5;
+    color: #0ead69;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+
+/* footer section */
+
+footer {
+    background-color: #fafafa;
+    margin-top: 200px;
+}
+
+
+
+
+.title-column-footer-section {
+    font-size: 18px;
+    font-family: 'IRANSansX-Black';
+
+}
+
+
+.span-title-column-footer-section {
+    color: #0ead69;
+}
+
+
+.description-section-column-footer-section {
+    color: #737373;
+    margin-top: 15px;
+    padding: 10px;
+    font-family: 'IRANSansX-Light';
+    font-size: 14px;
+
+}
+
+
+.icon-of-social-media {
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+
+}
+
+.icon-of-social-media a {
+    color: #d6d3d3;
+    background-color: #f9f9f9;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.icon-of-social-media a:hover {
+    transform: translateY(-8px);
+    transition: 0.5s;
+}
+
+.menu-of-footer {
+    margin-top: 15px;
+}
+
+.menu-of-footer ul {
+    margin-right: 25px;
+}
+
+.menu-of-footer-item {
+    color: #0ead69;
+    margin-bottom: 10px;
+}
+
+.menu-of-footer-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'IRANSansX-Light';
+    color: #727272;
+}
+
+.permissions-img {
+    margin-top: 20px;
+}
+
+
+.underline {
+    border-top: 1px solid #ddd;
+    /* padding: 0px 50px 20px 0px; */
+}
+
+.copyright-text {
+    padding: 0px;
+    padding: 20px;
+    margin: 0px;
+    font-size: 12px;
+}

@@ -1,0 +1,87 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load i18n %}
+{% block title %}
+فروشگاه - فروشگاه آنلاین
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/orderbulk.css' %}">
+{% endblock %}
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+
+{% block another_block %}
+<!-- the banner of store -->
+<div class="container-fluid mt-2 p-2">
+    <div class="row align-items-end">
+        <div class="col-11 container-of-banner">
+            <div class="banner-of-store">
+                <div class="overly"></div>
+                <div class="description-banner row d-flex align-items-center justify-content-center h-100">
+                    <div class="col">
+                        <h1 class="title-of-store">
+                            سفارش عمده
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+
+            <div class="container-form-orderbulk">
+                <form method="post" class="orderbulk-form">
+                    {% csrf_token %}
+                    <input type="text" name="first_name" class="orderbulk-input" placeholder="نام خود را وارد کنید">
+                    <input type="text" name="last_name" class="orderbulk-input"
+                        placeholder="نام خانوادگی خود را وارد کنید">
+                    <input type="text" name="phone" class="orderbulk-input" placeholder="شماره تماس خود را وارد کنید">
+                    <input type="text" name="whatsapp" class="orderbulk-input"
+                        placeholder="شماره واتساپ خود را وارد کنید">
+                    <input type="email" name="email" class="orderbulk-input" placeholder="ایمیل خود را وارد کنید">
+                    <input type="number" name="amount_kg" class="orderbulk-input"
+                        placeholder="مقدار سفارش: مقدار سفارش از 100 کیلوگرم است">
+                    <button type="submit" class="send-orderbulk-btn">ارسال</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-12 mt-5">
+            <h2 class="title-orderbulk">
+                سفارش عمده دارید؟
+            </h2>
+            <p class="description-orderbulk">
+                اگر قصد خرید محصولات ما را به صورت عمده یا در حجم بالا دارید، با کمال میل آماده‌ایم تا شرایط ویژه‌ای را
+                برای شما فراهم کنیم. جهت هماهنگی سریع‌تر و ارائه اطلاعات دقیق در مورد قیمت عمده، زمان تحویل و شرایط
+                ارسال، لطفاً فرم زیر را با دقت تکمیل نمایید.
+            </p>
+            <p class="description-orderbulk">
+                لطفاً نام و نام خانوادگی، نوع محصول مورد نظر، حجم تقریبی سفارش و راه‌های ارتباطی خود را وارد کنید.
+                حتماً یک شماره تلفن همراه دارای واتساپ وارد نمایید تا تیم پشتیبانی ما بتواند در سریع‌ترین زمان ممکن با
+                شما تماس بگیرد و جزئیات سفارش شما را بررسی کند.
+            </p>
+            <p class="description-orderbulk">
+                ما در تلاشیم تا بهترین کیفیت، قیمت مناسب و خدمات حرفه‌ای را برای مشتریان عمده خود فراهم کنیم.
+                منتظر ارتباط شما هستیم و از اعتماد شما سپاسگزاریم
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

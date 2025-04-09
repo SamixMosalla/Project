@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+{{ product.name }} - فروشگاه آنلاین
+{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/product-page.css' %}">
+{% endblock %}
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container mt-5">
+
+        <div class="simple-menu-user">
+            <div class="col-12 simple-menu-item">
+                <a href="{% url 'main:index' %}">خانه /</a>
+                <a href="{% url 'store:store' %}">محصولات /</a>
+                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </div>
+        </div>
+
+
+        <div class="row container-info-product">
+
+            <div class="col-12 col-lg-4 col-md-12 col-sm-12 container-product-img">
+                <img src="{{ product.image.url }}" alt="" class="img-fluid product-image">
+                <p class="discount-section">15%-</p>
+            </div>
+
+
+            <div class="col-12 col-lg-8 col-md-12 col-sm-12 container-data-product">
+                <div class="col-12 textwatermark-section">
+                    <!-- <p class="textwatermark">
+                        SAFFRON NUTS
+                    </p> -->
+                    <p class="name-product">
+                        {{ product.name }}
+                    </p>
+                </div>
+                <div class="grade-of-product">
+                    <i class='fas'>&#xf005;</i>
+                    <i class='fas'>&#xf005;</i>
+                    <i class='fas'>&#xf005;</i>
+                    <i class='fas'>&#xf005;</i>
+                    <i class='fas'>&#xf005;</i>
+                </div>
+                <p class="text-muted description-product">
+                    {{ product.Short_description }}
+                </p>
+                <p class="text-black price-product">
+                    <span class="text-success main-price">
+                        {{ product.main_price }}
+                    </span>
+                    <span class="text-success discount-price">
+                        {{ product.discount_price }}
+                    </span>
+                    تومان
+                </p>
+
+                <div class="buy-count-btn">
+                    <!-- <td class="product product-quantity">
+                        <div class="quantity-control">
+                            <button class="btn btn-sm decrease-qty  decrease-btn">-</button>
+                            <input type="text" class="qty-input count-product" value="{{ product.quantity }}"
+                                readonly>
+                            <button class="btn btn-sm increase-qty increase-btn">+</button>
+                        </div>
+                    </td> -->
+                    <a href="#" class="buy-section add-to-cart add-product-basket" data-product-id="{{ product.id }}">
+                        افزودن به سبد خرید
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="container-about-product">
+            <div class="row">
+                <div class="col-12 title-about-product">
+                    <a href="" data-target="content1" class="change_section">توضیحات</a>
+                    <a href="" data-target="content2" class="change_section">توضیحات تکمیلی</a>
+                    <a href="" data-target="content3" class="change_section">نظرات</a>
+                </div>
+
+                <div id="content1" class="col-12 description-about-product content">
+                    <p class="p-about-prodcut">
+                        {{ product.Description }}
+                    </p>
+                </div>
+
+                <div id="content2" class="col-12 another-description-product content">
+                    <div class="data-product">
+                        <p class="attribut-product">
+                            وزن
+                            <span>
+                                {{ product.weight }}
+                            </span>
+                        </p>
+                        <p class="attribut-product">
+                            کیفیت
+                            <span>
+                                {{ product.quality }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div id="content3" class="col-12 comment-form-section content">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 col-md-12 col-sm-12 text-comment">
+                            <p>
+                                نقد و بررسی ها
+                            </p>
+                            <p>
+                                {% if comments %}
+                                <ul class="comment-list">
+                                    {% for comment in comments %}
+                                        <li class="comment-item">
+                                            <div class="comment-header">
+                                                <strong>{{ comment.name }}</strong>
+                                                <span class="comment-date">{{ comment.created_at|date:"Y-m-d H:i" }}</span>
+                                            </div>
+                                            <p class="comment-content">{{ comment.content }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>هنوز دیدگاهی ثبت نشده است.</p>
+                            {% endif %}
+                            </p>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-12 col-sm-12 comment-form">
+                            <p>
+                                اولین کسی باشید که دیدگاهی می نویسد
+                                “{{ product.name }}”
+                            </p>
+                            <p class="about-comment-form">
+                                نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
+                                <span class="text-danger">*</span>
+                            </p>
+                            <!-- <div class="container-of-grade-product">
+                                <p>
+                                    امتیاز شما
+                                    <span class="text-danger">*</span>
+                                    :
+                                </p>
+                                <div class="grade-of-product grade-user-style">
+                                    <i class='far'>&#xf005;</i>
+                                    <i class='far'>&#xf005;</i>
+                                    <i class='far'>&#xf005;</i>
+                                    <i class='far'>&#xf005;</i>
+                                    <i class='far'>&#xf005;</i>
+                                </div>
+                            </div> -->
+
+                            <form method="post" class="form-container-content">
+                                {% csrf_token %}
+                                <div class="d-flex flex-column">
+                                    <label for="comment">دیدگاه
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <!-- <textarea name="comment" id="comment" class="usercomment mt-2"></textarea> -->
+                                    {{form.content}}
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex flex-column">
+                                        <label for="name" class="mt-4">
+                                            نام
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <!-- <input type="text" id="name" name="name"> -->
+                                        {{form.name}}
+                                    </div>
+                                    <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex flex-column">
+                                        <label for="email" class="mt-4">
+                                            ایمیل
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <!-- <input type="email" id="email" name="email"> -->
+                                        {{form.email}}
+
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <input type="checkbox" name="saveme" id="saveme">
+                                    <label for="saveme"> ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره
+                                        دیدگاهی
+                                        می‌نویسم.</label>
+                                </div>
+
+                                <button type="submit" class="send-comment-btn">فرستادن دیدگاه </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const links = document.querySelectorAll(".change_section");
+                    const contents = document.querySelectorAll(".content");
+                    links.forEach(link => {
+                        link.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            const targetId = this.getAttribute("data-target");
+                            contents.forEach(content => content.style.display = "none");
+                            const targetContent = document.getElementById(targetId);
+                            if (targetContent) {
+                                targetContent.style.display = "block";
+                            }
+                        });
+                    });
+
+                    if (contents.length > 0) {
+                        contents.forEach(content => content.style.display = "none");
+                        document.getElementById("content1").style.display = "block";
+                    }
+                });
+            </script>
+
+        </div>
+
+        <div class="container-related-product">
+            <div class="col-12 textwatermark-section">
+                <p class="textwatermark related-watermark">
+                    RELATED
+                </p>
+                <p class="name-product title-related-product">
+                    محصولاتـــ
+                    <span class="text-success">
+                        مرتبطـ
+                    </span>
+                </p>
+            </div>
+
+            <div class="row mt-3">
+
+                {% for product in product_item %}
+                <div class="col-6 col-md-4 col-lg-3  col-sm-4 mb-4 xs-class">
+                    <a href="{{ product.get_absolute_url }}">
+                        <div class="product-item">
+                            <img src="{{product.image.url}}" alt="{{product.name}}" class="img-fluid image-of-product">
+                            <a href="{{ product.get_absolute_url }}" class="name-product-item">{{product.name}}</a>
+                            <p class="price main-price"> {{ product.main_price }}
+                                <span class="price-unit main-price-unit">تومان</span>
+                            </p>
+                            <p class="price discount-price"> {{ product.discount_price }}
+                                <span class="price-unit">تومان</span>
+                            </p>
+                            <div class="start-buy-section d-flex justify-content-between">
+                                <div class="grade-of-product">
+                                    <i class='fas'>&#xf005;</i>
+                                    <i class='fas'>&#xf005;</i>
+                                    <i class='fas'>&#xf005;</i>
+                                    <i class='fas'>&#xf005;</i>
+                                    <i class='fas'>&#xf005;</i>
+                                </div>
+                                <div>
+                                    <a href="#" class="buy-section add-to-cart" data-product-id="{{ product.id }}">
+                                        <i class='fas icon-basket'>&#xf07a;</i>
+                                    </a>
+                                    <!-- see basket section when a product add to basket  -->
+                                    <a href="{% url 'main:cart' %}" class="view-cart" style="display:none;">مشاهده
+                                        سبد
+                                        خرید</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+<script src="{% static 'js/product-page.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+
+
+{% endblock %}

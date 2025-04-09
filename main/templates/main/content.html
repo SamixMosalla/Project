@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{{ blog_item.title }}{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/content.css' %}">
+{% endblock %}
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+
+
+
+
+{% block another_block %}
+<div class="container-banner-content mt-5">
+    <div class="row">
+        <div class="col-12 container-banner" style="background-image: url('{{ blog.image.url }}');">
+            <div class="overly-container-banner"></div>
+            <p class="tilte-content-item mt-3">
+                {{ blog.title }}
+            </p>
+            <div class="container time-pen-comment">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-lg-6">
+                        <p class="data-content-p">
+                            <i class='fas'>&#xf303;</i>
+                            ادمین سایت
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <p class="data-content-p">
+                            <i class='far'>&#xf017;</i>
+                            {{ blog.get_created_at_jalali }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container-of-content-store">
+        <div class="row diffrent-row  g-5">
+            <div class="col-12 col-lg-8 col-md-12 col-sm-12">
+
+                <div class="container-fluid ">
+                    <div class="row g-3 new-content flex-lg-wrap">
+                        <p class="about-content-item-p">
+                            {{ blog.description }}
+                        </p>
+
+                    </div>
+                    <div class="col-12 mt-5 container-form-content">
+                        <form method="post" class="form-container-content">
+                            {% csrf_token %}
+                            <p class="title-form-content">
+                                دیدگاهتان را بنویسید
+                            </p>
+                            <p class="description-form-content">
+                                نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
+                                <span class="text-danger">*</span>
+                            </p>
+                            <div class="d-flex flex-column">
+                                <label for="comment">دیدگاه
+                                    <span class="text-danger">*</span>
+                                </label>
+                                {{ comment_form.content }}
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 col-md-6 col-sm-12 d-flex flex-column">
+                                    <label for="name" class="mt-4">
+                                        نام
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    {{ comment_form.name }}
+                                </div>
+                                <div class="col-12 col-lg-6 col-md-6 col-sm-12 d-flex flex-column">
+                                    <label for="email" class="mt-4">
+                                        ایمیل
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <!-- <input type="email" id="email" name="email"> -->
+                                    {{ comment_form.email }}
+
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex flex-column">
+                                <label for="website" class="mt-4">وب سایت</label>
+                                {{ comment_form.website }}
+                            </div>
+                            <div class="col-12 mt-3">
+                                {{ comment_form.save_info }}
+                                <label for="saveme">
+                                    ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره
+                                    دیدگاهی
+                                    می‌نویسم.
+                                </label>
+                            </div>
+                            <button type="submit" class="send-comment-btn">فرستادن دیدگاه </button>
+                        </form>
+                    </div>
+
+                    {% for comment in comments %}
+                    <div class="comment-users">
+                        <img src="{% static 'imgs/userprofile.png' %}" alt="userprofile" class="user-profile-image">
+                        <p class="user-name">{{ comment.name }}</p>
+
+                        <p class="user-comment">{{ comment.content }}</p>
+                    </div>
+                    {% empty %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                <div class="join-section">
+                    <span class="title-join-section">
+                        عضویت در خبر نامه
+                    </span>
+                    {% if message %}
+                    <div class="alert alert-success success-subscribe">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    {% if form.non_field_errors %}
+                    <div>
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{error}}
+                        </div>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <form method="post" class="join-form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="joined-btn">
+                            عضویت
+                        </button>
+                    </form>
+                </div>
+
+                <div class="aside-content mt-4">
+                    <span class="title-aside-content-section">
+                        جدیدترین مطالب
+                    </span>
+
+                    <div class="container-aside-content">
+                        {% for blog in blog_item %}
+                        <a href="{{ blog.get_absolute_url }}" class="blog-link-page" style="text-decoration: none;">
+                            <div class="aside-content-item">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}"
+                                    class="img-fluid image-aside-content-item">
+                                <div>
+                                    <p class="title-aside-content-item">
+                                        {{ blog.title }}
+                                    </p>
+                                    <p class="time-realse-aside-content-item">
+                                        {{ blog.get_created_at_jalali }}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

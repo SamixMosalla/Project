@@ -1,0 +1,403 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}صفحه اصلی - فروشگاه آنلاین
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block logo %}
+<img src="{% static 'imgs/logo.jpg' %}" alt="logo" class="img-fluid logo-image">
+{% endblock %}
+
+{% block another_block %}
+<!-- the hero and about site section  -->
+<div class="container-of-hero-section">
+    <div class="row g-0 diffrent-row position-relative">
+        <div class="col-12 col-lg-6 col-md-12 col-sm-12 container-hero-section">
+            <img src="./static/imgs/hero-section-pic-1-min-768x546.png" alt="" class="img-fluid hero-img">
+            <div class="container-Hero-section-img">
+            </div>
+            <!-- <img src="./static/imgs/hero-section12.png" alt="" class="container-Hero-section-img"> -->
+        </div>
+
+        <div class="col-12 col-lg-6 col-md-12 col-sm-12 container-about-website">
+
+            <div class="container-fresh-text">
+                <p class="fresh-text">FRESH</p>
+                <p class="fresh-of-product-section">
+                    حس تازگی
+                    <span class="span-title-of new-product-section text-black">
+                        را با ما مزه کنید
+                    </span>
+                </p>
+
+            </div>
+
+            <div class="description-of-website">
+                <p class="description-of about-site text-muted p-4">
+                    وب‌سایت ما با هدف ارائه بهترین و باکیفیت‌ترین خرمای ایرانی راه‌اندازی شده است. ما با بهره‌گیری از
+                    تجربه کشاورزان و تولیدکنندگان خبره، مجموعه‌ای از مرغوب‌ترین انواع خرما را مستقیماً از نخلستان‌های
+                    ایران به دست شما می‌رسانیم. از خرمای مضافتی گرفته تا پیارم، زاهدی و کبکاب، هر محصول با دقت و
+                    استاندارد بالا بسته‌بندی شده و آماده ارسال به سراسر کشور و حتی خارج از کشور می‌باشد. طراحی ساده و
+                    کاربرپسند سایت، خرید آنلاین خرما را سریع، مطمئن و لذت‌بخش کرده است. ما به رضایت شما اهمیت می‌دهیم و
+                    در تلاش هستیم تجربه‌ای متفاوت از خرید محصولات ارگانیک را برای شما فراهم کنیم.
+                </p>
+            </div>
+
+            <div class="introduction-btn-header" style="direction: rtl;">
+                <a href="{% url 'store:store' %}" class="buy-snacks-btn">
+                    خرید محصولات
+                    <i class='fas icon-buy-snacks'>&#xf04b;</i>
+                </a>
+                <a href="#" class="introduction-video-btn">
+                    ویدیو معرفی
+                    <i class='fas icon-introduction-video'>&#xf03d;</i>
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}
+
+{% block text_header %}
+<!-- put the text of header in section metiiiii ???? -->
+<div class="container mt-5">
+    <div class="row g-4">
+        <div class="col-12 col-md-3 col-sm-6">
+            <div class="icon-text">
+                <img src="./static/imgs/icons/icons8-send-64(1).png" alt="" class="img-fluid">
+                <div class="information-text-of-header-section">
+                    <p class="first-text-information">
+                        تحویل سریع کالا در ایران
+                    </p>
+                    <p class="third-text-information">
+                        همان روز تحویل بگیر
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 col-sm-6">
+            <div class="icon-text">
+                <img src="./static/imgs/icons/icons8-phone-50.png" alt="" class="img-fluid">
+                <div class="information-text-of-header-section">
+                    <p class="first-text-information">
+                        پشتیبانی فوق سریع
+                    </p>
+                    <p class="third-text-information">
+                        پاسخگویی همه روزه
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 col-sm-6">
+            <div class="icon-text">
+                <img src="./static/imgs/icons/icons8-discount-80.png" alt="" class="img-fluid">
+                <div class="information-text-of-header-section">
+                    <p class="first-text-information">
+                        تضمین کمترین قیمت
+                    </p>
+                    <p class="third-text-information">
+                        با کمترین قیمت
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 col-sm-6">
+            <div class="icon-text">
+                <img src="./static/imgs/icons/icons8-lock-50.png" alt="" class="img-fluid">
+                <div class="information-text-of-header-section">
+                    <p class="first-text-information">
+                        پرداخت آنلاین و ایمن
+                    </p>
+                    <p class="third-text-information">
+                        با خیال راحت بخر
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container mt-5 p-3">
+
+        <!-- title category of product + watermarktext -->
+
+        <div class="row justify-content-center text-center position-relative mt-5 ">
+            <div class="col-12 position-relative text-watermark-section">
+                <p class="text-watermark category-text position-absolute">CATEGORY</p>
+                <p class="title-of category-of-product-section fs-2">
+                    دسته بندیـــــ
+                    <span class="span-title-of new-product-section text-success">محصولات</span>
+                </p>
+            </div>
+            <div class="col-md-8">
+                <p class="description-of new-category text-muted">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
+                </p>
+            </div>
+        </div>
+
+        <!-- category of product section -->
+        <div class="row g-4 category-item-section">
+
+            {% for category in category_item %}
+            <div class="col-6 col-md-4 col-lg-2 ">
+                <div class="category-item">
+                    <a href="#" class="category-item-link">
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}"
+                            class="img-fluid product-category-image">
+                        <p class="name-of-category-item">{{ category.name }}</p>
+                        <span class="count-of-product">{{ category.count_product }} محصول</span>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="col-12">
+
+                <div class="banner-of-main-section">
+                    <div class="overly"></div>
+                    <div class="description-banner row d-flex align-items-center justify-content-center">
+                        <div class="col-12 col-md-8">
+                            <h1>
+                                محصولات با کیفیت و دستچین شده را از ما بخواهید.
+                            </h1>
+                            <p>
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
+                            </p>
+                        </div>
+
+                        <div class="col-12 col-md-4 d-flex align-items-center justify-content-end">
+                            <a href="{% url 'store:store' %}" class="see-product-of-banner-btn">
+                                مشاهده همه
+                                <i class='fas icon-buy-snacks see-product-icon'>&#xf04b;</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- title new product + watermarktext -->
+
+        <div class="row justify-content-center text-center position-relative new-product-watermark">
+            <div class="col-12 position-relative text-watermark-section">
+                <p class="text-watermark new-product-text position-absolute">NEW</p>
+                <p class="title-of new-of-product-section fs-2">
+                    محصولاتـــــ
+                    <span class="span-title-of new-product-section text-success">جدید</span>
+                </p>
+            </div>
+            <div class="col-md-8">
+                <p class="description-of new-product text-muted">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- new product section  -->
+        <div class="row g-4 category-item-section">
+
+            {% for product in product_item %}
+            <div class="col-6 col-md-4 col-lg-3 xs-class">
+                <a href="{{ product.get_absolute_url }}">
+                    <div class="product-item">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid image-of-product">
+                        <a href="{{ product.get_absolute_url }}" class="name-product-item">
+                            {{ product.name }}
+                        </a>
+                        <p class="price main-price ">
+                            {{ product.main_price }}
+                            <span class="price-unit main-price-unit">
+                                تومان
+                            </span>
+                        </p>
+                        <!-- <p class="price discount-price">
+                            {{ product.discount_price }}
+                            <span class="price-unit">
+                                تومان
+                            </span>
+                        </p> -->
+
+                        <div class="start-buy-section">
+                            <!-- <div class="grade-of-product">
+                                <i class='fas'>&#xf005;</i>
+                                <i class='fas'>&#xf005;</i>
+                                <i class='fas'>&#xf005;</i>
+                                <i class='fas'>&#xf005;</i>
+                                <i class='fas'>&#xf005;</i>
+                            </div> -->
+
+
+                            <div class="mass-section">
+                                <a class="mass-btn" href="{% url 'orderbulk:orderbulk' %}">
+                                    <i class="fa truck-icon">&#xf0d1;</i>
+                                    <span class="btn-text">خرید عمده</span>
+                                </a>
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const massBtn = document.querySelector('.mass-btn');
+                                    const btnText = massBtn.querySelector('.btn-text');
+
+                                    massBtn.addEventListener('mouseenter', function () {
+                                        this.style.width = '150px';
+                                        btnText.style.display = 'inline-block';
+                                        setTimeout(() => {
+                                            btnText.style.opacity = '1';
+                                        }, 10); 
+                                    });
+
+                                    massBtn.addEventListener('mouseleave', function () {
+                                        this.style.width = '50px';
+                                        btnText.style.opacity = '0';
+                                        setTimeout(() => {
+                                            btnText.style.display = 'none';
+                                        }, 300); 
+                                    });
+                                });
+
+                            </script>
+
+
+                            <div>
+                                <button type="button" class="buy-section add-to-cart"
+                                    data-product-id="{{ product.id }}">
+                                    <i class='fas icon-basket'>&#xf07a;</i>
+                                </button>
+                                <!-- see basket section when a product add to basket  -->
+                                <a href="{% url 'main:cart' %}" class="view-cart" style="display:none;">مشاهده
+                                    سبد
+                                    خرید</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+
+            <div class="d-flex justify-content-center align-items-center mt-5 see-all-product-btn">
+                <a href="{% url 'store:store' %}" class="see-product-of-banner-btn">
+                    مشاهده همه
+                    <i class='fas icon-buy-snacks see-product-icon'>&#xf04b;</i>
+                </a>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- title new content + watermarktext  -->
+
+        <div class="row justify-content-center text-center position-relative new-content-watermark">
+            <div class="col-12 position-relative text-watermark-section">
+                <p class="text-watermark new-content-text position-absolute">BLOG</p>
+                <p class="title-of new-of-content-section fs-2">
+                    مطالبـــــ
+                    <span class="span-title-of new-product-section text-success">جدید</span>
+                </p>
+            </div>
+            <div class="col-md-8">
+                <p class="description-of new-content text-muted">
+                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.
+                </p>
+            </div>
+        </div>
+
+        <!-- new content section  -->
+        <div class="row g-4 category-item-section">
+
+            {% for item in blog_item %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="content-item">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid new-content-image">
+                    <div class="description-of-new-content">
+                        <p class="title-new-content">
+                            {{ item.title }}
+                        </p>
+                        <p class="main-description-new-content">
+                            {{ item.short_description }}
+                        </p>
+                        <div class="see-content-time">
+                            <p class="time-release">
+                                <i class='far'>&#xf017;</i>
+                                {{ item.get_created_at_jalali }}
+                            </p>
+                            <a href="{{ item.get_absolute_url }}" class="see-complete-content">
+                                ادامه مطلب
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".add-to-cart").forEach(function (button) {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                let productId = this.dataset.productId;
+
+                fetch("/add-to-cart/", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": getCookie("csrftoken"),
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `product_id=${productId}`
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("cart-total-items").innerText = data.total_items;
+                        document.getElementById("cart-total-price").innerText = data.total_price + " تومان";
+                        this.nextElementSibling.style.display = "inline";  // نمایش لینک "مشاهده سبد خرید"
+                    });
+            });
+        });
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            let cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+
+<!-- <script src="../../static/js/main.js"></script> -->
+
+{% endblock %}

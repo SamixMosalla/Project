@@ -1,0 +1,79 @@
+<table class="table cart-table">
+    <thead>
+        <tr>
+            <th>محصول</th>
+            <th>قیمت</th>
+            <th>تعداد</th>
+            <th>جمع جزء</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product_id, product in cart.items %}
+        <tr data-product-id="{{ product_id }}">
+            <td>
+                <img src="{{ product.image }}" alt="{{ product.name }}" width="50">
+                {{ product.name }}
+            </td>
+            <td>{{ product.price }} تومان</td>
+            <td>
+                <div class="quantity-control">
+                    <button class="btn btn-sm btn-outline-secondary decrease-qty">-</button>
+                    <input type="text" class="form-control qty-input" value="{{ product.quantity }}" readonly>
+                    <button class="btn btn-sm btn-outline-secondary increase-qty">+</button>
+                </div>
+            </td>
+            <td class="total-price">{{ product.total_price }} تومان</td>
+            <td>
+                <button class="btn btn-danger btn-sm remove-item">×</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<button class="btn btn-primary update-cart">بروزرسانی سبد خرید</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".update-cart").addEventListener("click", function () {
+            let formData = new FormData();
+
+            document.querySelectorAll("tbody tr").forEach(row => {
+                let productId = row.dataset.productId;
+                let quantity = row.querySelector(".qty-input").value;
+                formData.append(`items[${productId}]`, quantity);
+            });
+
+            fetch("/update-cart/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();  // رفرش صفحه برای مشاهده تغییرات
+                    }
+                });
+        });
+    });
+
+    // تابع برای دریافت CSRF توکن
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            let cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+</script>
