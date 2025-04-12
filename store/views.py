@@ -62,29 +62,51 @@ def filter_products_ajax(request):
 
 
 # ویو filter_products
-def filter_products(request):
-    if request.method == 'GET' and 'categories[]' in request.GET:
-        category_ids = request.GET.getlist('categories[]')
-        products = NewProducts.objects.filter(category__id__in=category_ids)
 
+def filter_products(request):
+    if request.method == 'GET':
+        # دریافت دسته‌بندی‌ها به دو روش مختلف (برای سازگاری با هر دو فرمت)
+        category_ids = request.GET.getlist('categories[]', []) or request.GET.get('categories', '').split(',')
+        
+        # حذف مقادیر خالی
+        category_ids = [cid for cid in category_ids if cid]
+        
+        if category_ids:
+            try:
+                products = NewProducts.objects.filter(category__id__in=category_ids).select_related('category')
+            except ValueError:
+                return JsonResponse({'error': 'شناسه دسته‌بندی نامعتبر است'}, status=400)
+        else:
+            # اگر هیچ دسته‌بندی انتخاب نشده، همه محصولات را نمایش بده
+            products = NewProducts.objects.all()
+        
         products_data = []
         for product in products:
-            products_data.append({
+            product_data = {
                 'id': product.id,
                 'name': product.name,
-                'image_url': product.image.url if product.image else '',
-                'short_description': product.Short_description,
-                'discount_price': product.discount_price,
-                # اطمینان حاصل می‌کنیم که قیمت ارسال می‌شود.
-                'main_price': product.main_price,
+                'image_url': product.image.url if product.image else '/static/images/no-image.png',
+                'short_description': product.Short_description[:100] + '...' if product.Short_description else '',
+                'discount_price': int(product.discount_price) if product.discount_price else None,
+                'main_price': int(product.main_price) if product.main_price else 0,
                 'url': product.get_absolute_url(),
-                # این لینک رو می‌تونید بسته به نیاز تغییر بدید.
                 'cart_url': reverse('main:cart'),
-                'bulk_url': reverse('orderbulk:orderbulk'),  # لینک خرید عمده
-            })
-
-        return JsonResponse({'products': products_data})
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+                'bulk_url': reverse('orderbulk:orderbulk'),
+                'has_discount': product.discount_price is not None and product.discount_price < product.main_price
+            }
+            products_data.append(product_data)
+        
+        return JsonResponse({
+            'success': True,
+            'products': products_data,
+            'count': len(products_data)
+        })
+    
+    return JsonResponse({
+        'success': False,
+        'error': 'درخواست نامعتبر',
+        'message': 'فقط درخواست‌های GET پذیرفته می‌شوند'
+    }, status=400)
 
 
 def store_view(request, template_name='store/store.html'):

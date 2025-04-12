@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // delete product with X
     document.querySelectorAll(".remove-item").forEach(button => {
         button.addEventListener("click", function () {
             let productId = this.closest("tbody").dataset.productId;

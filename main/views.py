@@ -10,7 +10,8 @@ from django.core.mail import send_mail
 from django.contrib.auth import logout
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-
+import json
+from django.views.decorators.http import require_POST
 
 def index(request):
     return render(request, 'main/index.html')
@@ -161,36 +162,79 @@ class BlogDetailView(DetailView):
         context['form'] = subscriber_form
         return self.render_to_response(context)
 
-
+@require_POST  # این دکوراتور تضمین می‌کند فقط درخواست‌های POST پذیرفته شوند
 def add_to_cart(request):
-    if request.method == "POST":
-        product_id = request.POST.get("product_id")
-        product = get_object_or_404(NewProducts, id=product_id)
-        cart = request.session.get("cart", {})
-
-        if product_id in cart:
-            cart[product_id]["quantity"] += 1
+    try:
+        # بررسی نوع محتوای درخواست
+        content_type = request.headers.get('Content-Type', '')
+        
+        if 'application/json' in content_type:
+            # پردازش درخواست JSON
+            data = json.loads(request.body)
+            product_id = data.get('product_id')
         else:
-            cart[product_id] = {
-                "name": product.name,
-                "price": product.discount_price,
-                "quantity": 1,
-                "image": product.image.url if product.image else "",
+            # پردازش درخواست فرم معمولی
+            product_id = request.POST.get('product_id')
+        
+        # اعتبارسنجی product_id
+        if not product_id:
+            return JsonResponse(
+                {"error": "شناسه محصول الزامی است"}, 
+                status=400
+            )
+        
+        try:
+            product_id = int(product_id)  # تبدیل به عدد برای امنیت بیشتر
+        except (ValueError, TypeError):
+            return JsonResponse(
+                {"error": "شناسه محصول نامعتبر است"}, 
+                status=400
+            )
+        
+        # دریافت محصول از دیتابیس
+        product = get_object_or_404(NewProducts, id=product_id)
+        
+        # دریافت یا ایجاد سبد خرید
+        cart = request.session.get('cart', {})
+        
+        # به‌روزرسانی سبد خرید
+        if str(product_id) in cart:
+            cart[str(product_id)]['quantity'] += 1
+        else:
+            cart[str(product_id)] = {
+                'name': product.name,
+                'price': float(product.discount_price),  # تبدیل به float برای اطمینان
+                'quantity': 1,
+                'image': product.image.url if product.image else '',
             }
-
-        request.session["cart"] = cart
+        
+        # ذخیره سبد خرید در سشن
+        request.session['cart'] = cart
         request.session.modified = True
-
-        total_items = sum(item["quantity"] for item in cart.values())
-        total_price = sum(item["quantity"] * item["price"]
-                          for item in cart.values())
-
+        
+        # محاسبه جمع‌های سبد خرید
+        total_items = sum(item['quantity'] for item in cart.values())
+        total_price = sum(item['quantity'] * item['price'] for item in cart.values())
+        
+        # پاسخ موفقیت‌آمیز
         return JsonResponse({
-            "total_items": total_items,
-            "total_price": total_price,
+            'success': True,
+            'total_items': total_items,
+            'total_price': total_price,
+            'message': 'محصول با موفقیت به سبد خرید اضافه شد'
         })
-    return JsonResponse({"error": "Invalid request"}, status=400)
-
+        
+    except Exception as e:
+        # ثبت خطا برای دیباگ
+        print(f"Error in add_to_cart: {str(e)}")
+        return JsonResponse(
+            {
+                'success': False,
+                'error': 'خطای سرور در پردازش درخواست',
+                'detail': str(e)
+            },
+            status=500
+        )
 
 def cart_view(request):
     cart = request.session.get("cart", {})

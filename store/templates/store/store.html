@@ -180,132 +180,148 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // انتخاب تمام چک‌باکس‌های دسته‌بندی
             const checkboxes = document.querySelectorAll('.category-checkbox');
 
+            // اضافه کردن رویداد تغییر به هر چک‌باکس
             checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function () {
-                    filterProducts();
-                });
+                checkbox.addEventListener('change', filterProducts);
             });
 
-            function filterProducts() {
-                const selectedCategories = [];
+            // بارگذاری اولیه تمام محصولات
+            filterProducts();
+        });
 
-                document.querySelectorAll('.category-checkbox:checked').forEach(checkbox => {
-                    selectedCategories.push(checkbox.value);
-                });
+        function filterProducts() {
+            const selectedCategories = [];
 
-                const url = '/filter-products/?';
-                const params = new URLSearchParams();
+            // جمع‌آوری دسته‌بندی‌های انتخاب شده
+            document.querySelectorAll('.category-checkbox:checked').forEach(checkbox => {
+                selectedCategories.push(checkbox.value);
+            });
 
-                selectedCategories.forEach(id => {
-                    params.append('categories[]', id);
-                });
+            // ساخت URL برای درخواست
+            const url = new URL('/filter-products/', window.location.origin);
 
-                fetch(url + params.toString())
-                    .then(response => response.json())
-                    .then(data => {
-                        updateProductsDisplay(data.products);
-                    })
-                    .catch(error => console.error('Error:', error));
+            // اضافه کردن پارامترهای دسته‌بندی
+            if (selectedCategories.length > 0) {
+                url.searchParams.append('categories', selectedCategories.join(','));
             }
 
-            function updateProductsDisplay(products) {
-                const container = document.getElementById('products-container');
-                container.innerHTML = ''; // ابتدا تمام محتوای قبلی رو پاک می‌کنیم
+            // نمایش حالت لودینگ
+            const container = document.getElementById('products-container');
+            container.innerHTML = '<div class="loading">در حال بارگیری محصولات...</div>';
 
-                // if (products.length === 0) {
-                //     container.innerHTML = '<p>محصولی یافت نشد</p>';
-                //     return;
-                // }
+            // ارسال درخواست به سرور
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('خطا در دریافت محصولات');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateProductsDisplay(data.products);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    container.innerHTML = `<div class="error">${error.message}</div>`;
+                });
+        }
 
-                products.forEach(product => {
-                    const productHtml = `
+        function updateProductsDisplay(products) {
+            const container = document.getElementById('products-container');
+
+            // اگر محصولی وجود نداشت
+            if (!products || products.length === 0) {
+                container.innerHTML = '<p class="no-products">محصولی یافت نشد</p>';
+                return;
+            }
+
+            // ساخت HTML محصولات
+            let productsHtml = '';
+            products.forEach(product => {
+                productsHtml += `
             <div class="col-6 col-md-4 col-lg-4 col-sm-4 mb-4 xs-class">
-                <a href="${product.url}">
-                    <div class="product-item" id="product_${product.id}">
-                        <img src="${product.image_url}" alt="" class="img-fluid image-of-product">
-                        <a href="${product.url}" class="name-product-item">${product.name}</a>
-                        <p class="price main-price">${product.main_price || 'قیمت ندارد'} <span class="price-unit main-price-unit">تومان</span></p>
-                        <!-- <p class="price discount-price">${product.discount_price || 'قیمت ندارد'} <span class="price-unit">تومان</span></p> -->
-                        <div class="start-buy-section d-flex justify-content-between">
-                            <div class="mass-section">
-                                <a class="mass-btn" href="${product.bulk_url}">
-                                    <i class="fa truck-icon">&#xf0d1;</i>
-                                    <span class="btn-text">خرید عمده</span>
-                                </a>
-                            </div>
-                            <div>
-                                <button href="#" class="buy-section add-to-cart" data-product-id="${product.id}">
-                                    <i class='fas icon-basket'>&#xf07a;</i>
-                                </button>
-                                <!-- see basket section when a product add to basket -->
-                                <a href="${product.cart_url}" class="view-cart" style="display:none;">مشاهده سبد خرید</a>
-                            </div>
+                <div class="product-item" id="product_${product.id}">
+                    <a href="${product.url || '#'}">
+                        <img src="${product.image_url || '/static/images/no-image.jpg'}" 
+                             alt="${product.name || 'محصول'}" 
+                             class="img-fluid image-of-product">
+                        <span class="name-product-item">${product.name || 'محصول بدون نام'}</span>
+                    </a>
+                    <p class="price main-price">
+                        ${product.main_price ? product.main_price.toLocaleString() : 'قیمت ندارد'} 
+                        <span class="price-unit main-price-unit">تومان</span>
+                    </p>
+                    <div class="start-buy-section d-flex justify-content-between">
+                        <div class="mass-section">
+                            <a class="mass-btn" href="${product.bulk_url || '#'}">
+                                <i class="fa truck-icon">&#xf0d1;</i>
+                                <span class="btn-text">خرید عمده</span>
+                            </a>
+                        </div>
+                        <div>
+                            <button class="buy-section add-to-cart" data-product-id="${product.id}">
+                                <i class='fas icon-basket'>&#xf07a;</i>
+                            </button>
+                            <a href="${product.cart_url || '/cart/'}" class="view-cart" style="display:none;">
+                                مشاهده سبد خرید
+                            </a>
                         </div>
                     </div>
-                </a>
-            </div>
-        `;
-                    container.innerHTML += productHtml;
-                });
-            }
-
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // ابتدا برای دکمه‌های موجود در بارگذاری اولیه، رویداد را ثبت می‌کنیم
-            document.querySelectorAll(".add-to-cart").forEach(function (button) {
-                button.addEventListener("click", handleAddToCart);
+                </div>
+            </div>`;
             });
 
-            // استفاده از event delegation برای دکمه‌های جدید که ممکن است بعداً اضافه شوند
-            document.body.addEventListener("click", function (e) {
-                if (e.target && e.target.matches(".add-to-cart")) {
-                    handleAddToCart(e);
-                }
+            container.innerHTML = productsHtml;
+
+            // اضافه کردن رویدادهای کلیک به دکمه‌های جدید
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', handleAddToCart);
             });
-        });
+        }
 
         function handleAddToCart(e) {
             e.preventDefault();
-            let productId = e.target.dataset.productId;
+            const button = e.currentTarget;
+            const productId = button.dataset.productId;
+            const csrfToken = getCookie('csrftoken');
 
             fetch("/add-to-cart/", {
                 method: "POST",
                 headers: {
-                    "X-CSRFToken": getCookie("csrftoken"),
+                    "X-CSRFToken": csrfToken,
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: `product_id=${productId}`
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('خطا در افزودن به سبد خرید');
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    document.getElementById("cart-total-items").innerText = data.total_items;
-                    document.getElementById("cart-total-price").innerText = data.total_price + " تومان";
-                    e.target.nextElementSibling.style.display = "inline";  // نمایش لینک مشاهده سبد خرید
+                    // به‌روزرسانی سبد خرید در نوار بالای صفحه
+                    document.getElementById("cart-total-items").textContent = data.total_items;
+                    document.getElementById("cart-total-price").textContent =
+                        data.total_price.toLocaleString() + " تومان";
+
+                    // نمایش لینک مشاهده سبد خرید
+                    button.nextElementSibling.style.display = "inline";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert(error.message);
                 });
         }
 
         function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== "") {
-                let cookies = document.cookie.split(";");
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = cookies[i].trim();
-                    if (cookie.startsWith(name + "=")) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
-
-
-
     </script>
 
 </main>

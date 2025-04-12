@@ -1,15 +1,110 @@
-{%load static%}
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        /* Modern & Clean Styling */
+        :root {
+            --primary: #6c63ff;
+            --dark: #2f2e41;
+            --light: #f8f9fa;
+            --error: #ff6b6b;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 0;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+        
+        .illustration {
+            max-width: 300px;
+            margin: 2rem auto;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a2e;
+                color: #f8f9fa;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated SVG Illustration (Optional) -->
+        <svg class="illustration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="#6c63ff" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm0-312c-22.2 0-40 17.8-40 40s17.8 40 40 40 40-17.8 40-40-17.8-40-40-40zm0 256c-22.2 0-40 17.8-40 40s17.8 40 40 40 40-17.8 40-40-17.8-40-40-40z"/>
+        </svg>
+        
+        <h1>404</h1>
+        <h2>Oops! Page Not Found</h2>
+        <p>We couldn't find the page you're looking for. It might have been moved or deleted.</p>
+        
+        <a href="/" class="btn">Go Back Home</a>
+    </div>
 
-{% block title %}صفحه پیدا نشد - 404{% endblock %}
-
-{% block content %}
-
-
-<div class="text-center mt-5">
-    <img src="{% static '404.jpg' %}" alt="404" class="img-fluid">
-
-</div>
-
-
-{% endblock %}
+    <!-- Optional: Add a fun animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("404 - Page not found");
+        });
+    </script>
+</body>
+</html>

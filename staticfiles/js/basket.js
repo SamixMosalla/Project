@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".add-to-cart").forEach(function (button) {
-        button.addEventListener("click", function (e) {
+    // استفاده از event delegation برای دکمه‌های جدید
+    document.body.addEventListener("click", function (e) {
+        if (e.target && e.target.matches(".add-to-cart")) {
             e.preventDefault();
-            let productId = this.dataset.productId;
+            let productId = e.target.dataset.productId;
 
             fetch("/add-to-cart/", {
                 method: "POST",
@@ -16,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     document.getElementById("cart-total-items").innerText = data.total_items;
                     document.getElementById("cart-total-price").innerText = data.total_price + " تومان";
-                    this.nextElementSibling.style.display = "inline";
+                    e.target.nextElementSibling.style.display = "inline";  // نمایش لینک مشاهده سبد خرید
                 });
-        });
+        }
     });
 });
 

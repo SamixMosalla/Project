@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block style %}
+<meta name="csrf-token" content="{{ csrf_token }}">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
@@ -262,7 +263,7 @@
                                         btnText.style.display = 'inline-block';
                                         setTimeout(() => {
                                             btnText.style.opacity = '1';
-                                        }, 10); 
+                                        }, 10);
                                     });
 
                                     massBtn.addEventListener('mouseleave', function () {
@@ -270,7 +271,7 @@
                                         btnText.style.opacity = '0';
                                         setTimeout(() => {
                                             btnText.style.display = 'none';
-                                        }, 300); 
+                                        }, 300);
                                     });
                                 });
 
@@ -278,8 +279,8 @@
 
 
                             <div>
-                                <button type="button" class="buy-section add-to-cart"
-                                    data-product-id="{{ product.id }}">
+                                <button type="button" class="buy-section add-to-cart" data-product-id="{{ product.id }}"
+                                    onclick="addToCart(this)">
                                     <i class='fas icon-basket'>&#xf07a;</i>
                                 </button>
                                 <!-- see basket section when a product add to basket  -->
@@ -358,37 +359,13 @@
 </main>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".add-to-cart").forEach(function (button) {
-            button.addEventListener("click", function (e) {
-                e.preventDefault();
-                let productId = this.dataset.productId;
-
-                fetch("/add-to-cart/", {
-                    method: "POST",
-                    headers: {
-                        "X-CSRFToken": getCookie("csrftoken"),
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: `product_id=${productId}`
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById("cart-total-items").innerText = data.total_items;
-                        document.getElementById("cart-total-price").innerText = data.total_price + " تومان";
-                        this.nextElementSibling.style.display = "inline";  // نمایش لینک "مشاهده سبد خرید"
-                    });
-            });
-        });
-    });
-
     function getCookie(name) {
         let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-            let cookies = document.cookie.split(";");
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
-                let cookie = cookies[i].trim();
-                if (cookie.startsWith(name + "=")) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                     break;
                 }
@@ -396,8 +373,43 @@
         }
         return cookieValue;
     }
+
+
+
+    function addToCart(button) {
+        const productId = button.dataset.productId;
+        const csrfToken = getCookie('csrftoken'); // دریافت توکن CSRF
+
+        fetch("/add-to-cart/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrfToken, // ارسال توکن در هدر
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                product_id: productId
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // به روزرسانی سبد خرید
+                document.getElementById("cart-total-items").textContent = data.total_items;
+                document.getElementById("cart-total-price").textContent = data.total_price + " تومان";
+
+                // نمایش پیام موفقیت
+                const nextElement = button.nextElementSibling;
+                if (nextElement) {
+                    nextElement.style.display = "inline";
+                }
+            })
+            .catch(error => {
+                console.error("خطا:", error);
+                alert("خطا در افزودن به سبد خرید");
+            });
+    }
+
 </script>
 
-<!-- <script src="../../static/js/main.js"></script> -->
+
 
 {% endblock %}

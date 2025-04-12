@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-sxo(7dgj9^((^6^4w##-+4#2&9&_5h18tik==f$0)=*sk+*k(%
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+ 
 ORDER_RECEIVER_EMAIL = 'mrahimy1029@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # my own
     'main',
     'store',
     'blog',
